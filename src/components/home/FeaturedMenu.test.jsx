@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import FeaturedMenu from './FeaturedMenu'
 
 const MOCK_ITEMS = [
@@ -9,25 +10,25 @@ const MOCK_ITEMS = [
 
 describe('FeaturedMenu', () => {
   it('renders all items', () => {
-    render(<FeaturedMenu items={MOCK_ITEMS} whatsappNumber="2348000000000" />)
+    render(<MemoryRouter><FeaturedMenu items={MOCK_ITEMS} whatsappNumber="2348000000000" /></MemoryRouter>)
     expect(screen.getByText('Taco Trio')).toBeInTheDocument()
     expect(screen.getByText('Curry Del Mare')).toBeInTheDocument()
   })
 
   it('formats price with ₦ and commas', () => {
-    render(<FeaturedMenu items={MOCK_ITEMS} whatsappNumber="2348000000000" />)
+    render(<MemoryRouter><FeaturedMenu items={MOCK_ITEMS} whatsappNumber="2348000000000" /></MemoryRouter>)
     expect(screen.getByText('₦15,000')).toBeInTheDocument()
     expect(screen.getByText('₦20,000')).toBeInTheDocument()
   })
 
   it('renders order links pointing to WhatsApp', () => {
-    render(<FeaturedMenu items={MOCK_ITEMS} whatsappNumber="2348000000000" />)
+    render(<MemoryRouter><FeaturedMenu items={MOCK_ITEMS} whatsappNumber="2348000000000" /></MemoryRouter>)
     const orderLinks = screen.getAllByRole('link', { name: /order/i })
     orderLinks.forEach(link => expect(link.href).toContain('wa.me'))
   })
 
   it('renders icon placeholder when item has no image', () => {
-    const { container } = render(<FeaturedMenu items={MOCK_ITEMS} whatsappNumber="2348000000000" />)
+    const { container } = render(<MemoryRouter><FeaturedMenu items={MOCK_ITEMS} whatsappNumber="2348000000000" /></MemoryRouter>)
     const placeholderDivs = container.querySelectorAll('.bg-beige2')
     expect(placeholderDivs.length).toBe(MOCK_ITEMS.length)
   })

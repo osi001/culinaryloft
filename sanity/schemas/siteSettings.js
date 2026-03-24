@@ -32,5 +32,18 @@ export default {
       ],
     },
     { name: 'deliveryAreaDescription', title: 'Delivery Area Description', type: 'text', rows: 3 },
+    {
+      name: 'mapEmbedUrl',
+      title: 'Google Maps Embed URL',
+      type: 'url',
+      description: 'Paste the embed src URL from Google Maps → Share → Embed a map',
+    },
+    {
+      name: 'deliveryZones',
+      title: 'Delivery Zones',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Areas Culinaryloft delivers to — shown as tags on the Contact page',
+    },
   ],
 }

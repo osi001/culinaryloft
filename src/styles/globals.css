@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #FDFAF4;
+    color: #1E1E1E;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    @apply text-tan text-xs font-body font-medium tracking-widest uppercase;
+  }
+
+  .section-divider {
+    @apply block w-12 h-px bg-tan mt-3 mb-6;
+  }
+}

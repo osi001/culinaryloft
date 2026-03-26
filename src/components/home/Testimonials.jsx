@@ -6,7 +6,7 @@ import { urlFor } from '../../lib/imageUrl'
 const FALLBACK = [
   { _id: 'f1', name: 'Adaeze O.', quote: 'The Curry Del Mare is absolutely divine. Delivery was fast and everything arrived piping hot.', image: null },
   { _id: 'f2', name: 'Kola B.', quote: 'Best jollof in Lagos, hands down. The charred ember jollof is a game changer.', image: null },
-  { _id: 'f3', name: 'Temi A.', quote: 'Healthy food that actually tastes amazing. Culinaryloft has ruined regular restaurants for me.', image: null },
+  { _id: 'f3', name: 'Temi A.', quote: 'The Flamed-Seared Prime Mash is something else entirely. I keep coming back just for that dish.', image: null },
 ]
 
 function TestimonialCard({ testimonial, index }) {

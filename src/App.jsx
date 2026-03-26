@@ -14,7 +14,7 @@ import BlogPost from './pages/BlogPost'
 import NotFound from './pages/NotFound'
 import './styles/globals.css'
 
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || ''
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2349134661110'
 
 export default function App() {
   return (

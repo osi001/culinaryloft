@@ -22,8 +22,9 @@ export default function WhatsAppButton({ number, message = DEFAULT_MESSAGE }) {
       </svg>
       <motion.span
         className="absolute inset-0 rounded-full bg-green"
-        animate={{ scale: [1, 1.4], opacity: [0.5, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeOut' }}
+        style={{ willChange: 'transform, opacity' }}
+        animate={{ scale: [1, 1.5], opacity: [0.4, 0] }}
+        transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 0.8, ease: 'easeOut' }}
       />
     </motion.a>
   )

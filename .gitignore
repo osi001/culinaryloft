@@ -3,3 +3,13 @@ node_modules/
 dist/
 .env
 .env.*
+
+# Tooling — not for client repo
+.claude/
+.claude-flow/
+.superpowers/
+.mcp.json
+CLAUDE.md
+CULINARYLOFT_PRD.md
+docs/superpowers/
+test_output.log

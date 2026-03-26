@@ -5,18 +5,17 @@ import Hero from './Hero'
 
 describe('Hero', () => {
   it('renders main headline', () => {
-    render(<MemoryRouter><Hero whatsappNumber="2348000000000" /></MemoryRouter>)
+    render(<MemoryRouter><Hero /></MemoryRouter>)
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument()
   })
 
-  it('renders WhatsApp CTA button', () => {
-    render(<MemoryRouter><Hero whatsappNumber="2348000000000" /></MemoryRouter>)
-    const link = screen.getByRole('link', { name: /order/i })
-    expect(link.href).toContain('wa.me')
+  it('renders brand name in headline', () => {
+    render(<MemoryRouter><Hero /></MemoryRouter>)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/culinary loft/i)
   })
 
-  it('renders a green health badge', () => {
-    render(<MemoryRouter><Hero whatsappNumber="2348000000000" /></MemoryRouter>)
-    expect(screen.getByText(/health/i)).toBeInTheDocument()
+  it('renders tagline', () => {
+    render(<MemoryRouter><Hero /></MemoryRouter>)
+    expect(screen.getByText(/where food becomes memory/i)).toBeInTheDocument()
   })
 })

@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        cream: '#FDFAF4',
-        beige: '#EDE3D1',
-        beige2: '#D9C9AE',
-        tan: '#C4A882',
-        brown: '#7A5C3A',
-        charcoal: '#1E1E1E',
-        mid: '#5A5040',
+        cream: '#E9E9E9',
+        beige: '#DCDCDC',
+        beige2: '#C2C2C2',
+        tan: '#9A9898',
+        brown: '#5A4E45',
+        charcoal: '#2C2828',
+        mid: '#625F5D',
         green: '#3D6B52',
       },
       fontFamily: {

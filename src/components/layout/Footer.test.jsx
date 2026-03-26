@@ -10,17 +10,19 @@ function renderFooter(settings = {}) {
 describe('Footer', () => {
   it('renders brand name', () => {
     renderFooter()
-    expect(screen.getByText('Culinaryloft')).toBeInTheDocument()
+    expect(screen.getByText('Culinary Loft')).toBeInTheDocument()
   })
 
-  it('renders fallback tagline when no settings', () => {
+  it('renders location text', () => {
     renderFooter()
-    expect(screen.getByText(/health-forward cuisine/i)).toBeInTheDocument()
+    expect(screen.getByText(/lagos/i)).toBeInTheDocument()
   })
 
-  it('renders tagline from settings when provided', () => {
-    renderFooter({ tagline: 'Custom tagline text' })
-    expect(screen.getByText('Custom tagline text')).toBeInTheDocument()
+  it('renders nav links', () => {
+    renderFooter()
+    expect(screen.getByRole('link', { name: /menu/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument()
   })
 
   it('renders WhatsApp link to correct number when provided', () => {
@@ -29,14 +31,8 @@ describe('Footer', () => {
     expect(waLink.href).toContain('wa.me/2348012345678')
   })
 
-  it('renders email link when email provided', () => {
-    renderFooter({ email: 'hello@culinaryloft.ng' })
-    const emailLink = screen.getByRole('link', { name: /hello@culinaryloft/i })
-    expect(emailLink.href).toContain('mailto:')
-  })
-
-  it('does not render email link when email not provided', () => {
-    renderFooter({})
-    expect(screen.queryByRole('link', { name: /mailto/i })).toBeNull()
+  it('renders copyright notice', () => {
+    renderFooter()
+    expect(screen.getByText(/all rights reserved/i)).toBeInTheDocument()
   })
 })

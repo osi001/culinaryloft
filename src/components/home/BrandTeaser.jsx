@@ -1,63 +1,81 @@
 import { motion } from 'framer-motion'
-import { Leaf, Flame, Heart } from 'lucide-react'
-import Logo from '../../assets/Logo.png'
+import storyPhoto from '../../assets/photo-story.jpeg'
 
-const VALUES = [
-  { icon: Leaf, title: 'Wholesome Ingredients', body: 'Every dish starts with fresh, locally sourced produce chosen for quality and nutrition.' },
-  { icon: Flame, title: 'Crafted with Fire', body: 'From ember-jollof to pepper-soup — bold Nigerian flavours elevated with artisanal technique.' },
-  { icon: Heart, title: 'Made for You', body: 'Each order is prepared fresh. No mass batches, no compromise on quality.' },
-]
+const fadeIn = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: 'easeOut' } },
+}
 
-export default function BrandTeaser() {
+export default function OurStory() {
   return (
-    <section className="bg-charcoal text-white py-20 px-4 md:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="eyebrow text-tan">Our Story</span>
-            <span className="block w-12 h-px bg-tan mt-3 mb-6" />
-            <h2 className="font-display text-4xl md:text-5xl leading-tight mb-5">
-              Rooted in Lagos,<br />
-              <em className="text-tan">nourishing</em> every table
-            </h2>
-            <p className="text-white/70 font-body text-base leading-relaxed max-w-md">
-              Culinaryloft was born from a simple belief: that healthy food should never taste like a compromise. We take the bold, vibrant flavours of Nigerian cuisine and build them around ingredients your body loves.
-            </p>
+    <section className="relative py-16 md:py-20 px-8 md:px-16 overflow-hidden">
+
+      {/* Background photo */}
+      <img
+        src={storyPhoto}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      {/* Cream overlay */}
+      <div className="absolute inset-0 bg-cream/80" />
+
+      {/* Top fade — dissolves from manifesto's steam photo */}
+      <div
+        className="absolute inset-x-0 top-0 h-32 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, #E9E9E9 0%, transparent 100%)' }}
+      />
+      {/* Bottom fade — dissolves into Experiences */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-32 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, #DCDCDC 0%, transparent 100%)' }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-2xl mx-auto text-center">
+
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={fadeIn}
+          className="mb-5"
+        >
+          <h2 className="font-display text-3xl md:text-4xl text-brown">Our Story</h2>
+          <span className="block w-8 h-px bg-beige2 mx-auto mt-4 mb-0" />
+        </motion.div>
+
+        <motion.div
+          className="flex flex-col gap-3 text-mid"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={{ show: { transition: { staggerChildren: 0.2 } } }}
+        >
+          <motion.div variants={fadeIn}>
+            <p className="font-display text-xl md:text-2xl leading-relaxed">He cooked in quiet ways.</p>
+            <p className="font-body text-sm text-tan italic mt-1">Not for attention — but for love.</p>
           </motion.div>
 
-          <motion.div
-            className="flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <div className="w-48 h-48 rounded-full border-2 border-white/20 flex items-center justify-center bg-white/5">
-              <img src={Logo} alt="Culinaryloft" className="w-36 h-36 object-contain opacity-80" />
-            </div>
+          <motion.div variants={fadeIn} className="font-body text-sm text-mid leading-loose">
+            <p>A father. A husband.</p>
+            <p>A man who understood that food could hold memory.</p>
           </motion.div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 border-t border-white/10 pt-12">
-          {VALUES.map(({ icon: Icon, title, body }, i) => (
-            <motion.div
-              key={title}
-              className="flex flex-col gap-3"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <Icon size={20} className="text-tan" />
-              <h3 className="font-display text-xl text-white">{title}</h3>
-              <p className="text-white/60 font-body text-sm leading-relaxed">{body}</p>
-            </motion.div>
-          ))}
-        </div>
+          <motion.div variants={fadeIn} className="border-l border-beige2 pl-5 text-left font-body text-sm text-mid leading-loose mx-auto max-w-sm">
+            <p>We learned in that stillness.</p>
+            <p className="mt-1">That recipes are not written — they are carried.</p>
+            <p>Passed from hand to hand. From moment to moment.</p>
+          </motion.div>
+
+          <motion.div variants={fadeIn} className="font-body text-sm text-mid leading-loose">
+            <p className="font-display text-lg text-brown">Culinary Loft lives there now.</p>
+            <p className="mt-1">In the spaces between people.</p>
+            <p>In the pause before the first bite.</p>
+            <p>In the warmth that stays after.</p>
+          </motion.div>
+        </motion.div>
+
       </div>
     </section>
   )

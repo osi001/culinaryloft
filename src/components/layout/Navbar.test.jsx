@@ -2,20 +2,23 @@ import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
+import { CartProvider } from '../../context/CartContext'
 import Navbar from './Navbar'
 
 function renderNav() {
   return render(
-    <MemoryRouter>
-      <Navbar whatsappNumber="2348012345678" />
-    </MemoryRouter>
+    <CartProvider>
+      <MemoryRouter>
+        <Navbar whatsappNumber="2348012345678" />
+      </MemoryRouter>
+    </CartProvider>
   )
 }
 
 describe('Navbar', () => {
   it('renders brand name', () => {
     renderNav()
-    expect(screen.getByText(/culinaryloft/i)).toBeInTheDocument()
+    expect(screen.getByText(/culinary loft/i)).toBeInTheDocument()
   })
 
   it('renders nav links', () => {
@@ -26,6 +29,11 @@ describe('Navbar', () => {
   it('shows mobile menu toggle button', () => {
     renderNav()
     expect(screen.getByRole('button', { name: /open menu/i })).toBeInTheDocument()
+  })
+
+  it('shows cart button', () => {
+    renderNav()
+    expect(screen.getByRole('button', { name: /open cart/i })).toBeInTheDocument()
   })
 
   it('opens mobile menu on toggle click', async () => {

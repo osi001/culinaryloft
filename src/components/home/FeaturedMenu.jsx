@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { UtensilsCrossed } from 'lucide-react'
 import SectionHeading from '../shared/SectionHeading'
 import { urlFor } from '../../lib/imageUrl'
@@ -70,14 +71,12 @@ export default function FeaturedMenu({ items = [], whatsappNumber }) {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <a
-            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hi, I'd like to see your full menu.")}`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/menu"
             className="inline-block border border-beige2 text-charcoal font-body font-medium text-sm py-3 px-8 rounded-sm hover:bg-beige2 transition-colors"
           >
-            See Full Menu on WhatsApp
-          </a>
+            See Full Menu
+          </Link>
         </div>
       </div>
     </section>

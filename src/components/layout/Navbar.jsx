@@ -7,8 +7,6 @@ import logo from '../../assets/logo-chef.png'
 
 const NAV_LINKS = [
   { to: '/menu', label: 'Menu' },
-  { to: '/gallery', label: 'Gallery' },
-  { to: '/blog', label: 'Blog' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
 ]

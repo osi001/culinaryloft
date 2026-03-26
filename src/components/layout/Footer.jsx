@@ -33,7 +33,7 @@ export default function Footer() {
         <div>
           <p className="font-body text-xs text-tan tracking-widest uppercase mb-4">Pages</p>
           <nav className="flex flex-col gap-3">
-            {[['/', 'Home'], ['/menu', 'Menu'], ['/about', 'About'], ['/blog', 'Blog'], ['/contact', 'Contact']].map(([to, label]) => (
+            {[['/', 'Home'], ['/menu', 'Menu'], ['/about', 'About'], ['/contact', 'Contact']].map(([to, label]) => (
               <Link
                 key={to}
                 to={to}

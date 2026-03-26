@@ -21,10 +21,9 @@ export default async function handler(req, res) {
   if (
     !process.env.SMTP_HOST ||
     !process.env.SMTP_USER ||
-    !process.env.SMTP_PASS ||
-    !process.env.CONTACT_TO
+    !process.env.SMTP_PASS
   ) {
-    console.warn('[api/contact] Missing required environment variables (SMTP_HOST, SMTP_USER, SMTP_PASS, CONTACT_TO)');
+    console.warn('[api/contact] Missing required SMTP environment variables');
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
@@ -80,7 +79,7 @@ export default async function handler(req, res) {
   }
 
   const from = process.env.CONTACT_FROM || process.env.SMTP_USER;
-  const to = process.env.CONTACT_TO;
+  const to = process.env.CONTACT_TO || 'orders@theculinaryloft.com';
 
   const textBody = [
     `Name: ${name.trim()}`,

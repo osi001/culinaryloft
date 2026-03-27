@@ -17,7 +17,7 @@ function buildCartMessage(items) {
   ].join('\n')
 }
 
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || ''
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2349134661110'
 
 export default function CartDrawer() {
   const { items, updateQty, removeItem, clearCart, total, drawerOpen, closeDrawer } = useCart()

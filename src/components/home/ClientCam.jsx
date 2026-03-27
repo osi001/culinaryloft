@@ -53,28 +53,30 @@ export default function ClientCam() {
     return () => clearInterval(timerRef.current)
   }, [resetTimer])
 
-  // When we slide past clones, instantly jump to the real cards (no transition)
+  // After sliding into a clone, instantly reposition to the real equivalent card
   useEffect(() => {
     if (index >= PHOTOS.length + CLONES) {
       const id = setTimeout(() => {
         setTransitioning(false)
         setIndex(CLONES)
-      }, 700)
+      }, 750)
       return () => clearTimeout(id)
     }
     if (index < CLONES) {
       const id = setTimeout(() => {
         setTransitioning(false)
         setIndex(PHOTOS.length + CLONES - 1)
-      }, 700)
+      }, 750)
       return () => clearTimeout(id)
     }
   }, [index])
 
-  // Re-enable transition after instant jump
+  // Re-enable transition only after the browser has painted the jumped position
   useEffect(() => {
     if (!transitioning) {
-      const id = requestAnimationFrame(() => setTransitioning(true))
+      const id = requestAnimationFrame(() =>
+        requestAnimationFrame(() => setTransitioning(true))
+      )
       return () => cancelAnimationFrame(id)
     }
   }, [transitioning])
@@ -134,7 +136,7 @@ export default function ClientCam() {
           className="flex gap-5 pb-6"
           style={{
             transform: `translateX(${-index * CARD_W}px)`,
-            transition: transitioning ? 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+            transition: transitioning ? 'transform 0.65s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
           }}
         >
           {TRACK.map((src, i) => (

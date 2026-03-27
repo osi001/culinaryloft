@@ -6,6 +6,7 @@ import { useCart } from '../../context/CartContext'
 import logo from '../../assets/logo-chef.png'
 
 const NAV_LINKS = [
+  { to: '/', label: 'Home' },
   { to: '/menu', label: 'Menu' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },

@@ -18,6 +18,15 @@ export default {
         display: ['"Cormorant Garamond"', 'serif'],
         body: ['"DM Sans"', 'sans-serif'],
       },
+      keyframes: {
+        'client-scroll': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        'client-scroll': 'client-scroll 32s linear infinite',
+      },
     },
   },
   plugins: [],

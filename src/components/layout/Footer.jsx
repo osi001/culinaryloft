@@ -5,7 +5,7 @@ const EMAILS = ['hello@theculinaryloft.com', 'orders@theculinaryloft.com']
 const WA_NUMBER = '2349134661110'
 const HOURS = [
   { days: 'Monday – Saturday', time: '8:00 AM – 9:00 PM' },
-  { days: 'Sunday', time: '10:00 AM – 6:00 PM' },
+  { days: 'Sunday', time: 'Closed' },
 ]
 
 export default function Footer() {

@@ -5,6 +5,7 @@ import OurStory from '../components/home/BrandTeaser'
 import Experiences from '../components/home/Experiences'
 import Glimpses from '../components/home/Glimpses'
 import Testimonials from '../components/home/Testimonials'
+import ClientCam from '../components/home/ClientCam'
 import NewsletterSignup from '../components/home/NewsletterSignup'
 import steamPhoto from '../assets/photo-steam.jpeg'
 
@@ -99,6 +100,7 @@ export default function Home() {
       <Experiences />
       <Glimpses />
       <Testimonials />
+      <ClientCam />
       <NewsletterSignup />
     </main>
   )

@@ -1,19 +1,31 @@
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import photoHero from '../../assets/photo-hero.jpeg'
 import photoStory from '../../assets/photo-story.jpeg'
 import photoSetting from '../../assets/photo-setting.jpeg'
 import photoSteam from '../../assets/photo-steam.jpeg'
 import photoEmpty from '../../assets/photo-empty.jpeg'
+import photoGlimpse6 from '../../assets/photo-glimpse6.jpeg'
 
 const PHOTOS = [
-  { src: photoSteam, alt: 'Steam rising from a dish', className: 'col-span-1 row-span-2' },
-  { src: photoHero, alt: 'Chef finishing a plate', className: 'col-span-1 row-span-1' },
-  { src: photoStory, alt: 'Candlelit table', className: 'col-span-1 row-span-1' },
-  { src: photoEmpty, alt: 'Empty plate after the meal', className: 'col-span-1 row-span-1' },
-  { src: photoSetting, alt: 'Place setting with wine', className: 'col-span-1 row-span-1' },
+  { src: photoSteam, alt: 'Steam rising from a dish' },
+  { src: photoHero, alt: 'Chef finishing a plate' },
+  { src: photoStory, alt: 'Candlelit table' },
+  { src: photoEmpty, alt: 'Empty plate after the meal' },
+  { src: photoSetting, alt: 'Place setting with wine' },
+  { src: photoGlimpse6, alt: 'Seafood spread' },
 ]
 
 export default function Glimpses() {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent(i => (i + 1) % PHOTOS.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <section className="bg-cream py-14 md:py-18 px-8 md:px-16">
       <div className="max-w-6xl mx-auto">
@@ -36,24 +48,34 @@ export default function Glimpses() {
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[200px] md:auto-rows-[260px] gap-3">
-          {PHOTOS.map((photo, i) => (
-            <motion.div
-              key={i}
-              className={`overflow-hidden rounded-sm ${photo.className}`}
+        {/* Slideshow — landscape, no crop */}
+        <div className="relative overflow-hidden rounded-sm aspect-video">
+          <AnimatePresence mode="sync">
+            <motion.img
+              key={current}
+              src={PHOTOS[current].src}
+              alt={PHOTOS[current].alt}
+              className="absolute inset-0 w-full h-full object-cover"
               initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.9 }}
-            >
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: 'easeInOut' }}
+            />
+          </AnimatePresence>
+
+          {/* Dot indicators */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+            {PHOTOS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                aria-label={`Go to photo ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === current ? 'w-5 bg-cream' : 'w-1.5 bg-cream/50'
+                }`}
               />
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
 
       </div>

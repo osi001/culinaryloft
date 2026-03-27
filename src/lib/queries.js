@@ -1,26 +1,16 @@
-// Homepage data: 4 featured menu items + testimonials + site settings
+// Homepage data: featured items + testimonials + experiences + site settings
 export const HOMEPAGE_QUERY = `{
   "featuredItems": *[_type == "menuItem" && featured == true && available == true] | order(_createdAt asc) [0..3] {
-    _id,
-    name,
-    description,
-    price,
-    image,
-    "categoryName": category->name,
+    _id, name, description, price, image, "categoryName": category->name,
   },
-  "testimonials": *[_type == "testimonial"] | order(order asc) [0..5] {
-    _id,
-    name,
-    quote,
-    image,
+  "testimonials": *[_type == "testimonial"] | order(order asc) {
+    _id, quote, handle, name,
+  },
+  "experiences": *[_type == "experience"] | order(order asc) {
+    _id, title, body, photo,
   },
   "settings": *[_type == "siteSettings"][0] {
-    businessName,
-    tagline,
-    whatsappNumber,
-    phone,
-    email,
-    address,
+    businessName, tagline, whatsappNumber, phone, email, address, hours,
   }
 }`
 

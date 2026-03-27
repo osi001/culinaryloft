@@ -8,24 +8,16 @@ import MenuGrid from '../components/menu/MenuGrid'
 import LoadingSpinner from '../components/shared/LoadingSpinner'
 
 export default function Menu() {
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState({ categories: STATIC_CATEGORIES, items: STATIC_ITEMS })
   const [activeCategory, setActiveCategory] = useState(null)
 
   useEffect(() => {
     const projectId = import.meta.env.VITE_SANITY_PROJECT_ID
-    if (!projectId || projectId === 'placeholder') {
-      setData({ categories: STATIC_CATEGORIES, items: STATIC_ITEMS })
-      setLoading(false)
-      return
-    }
+    if (!projectId || projectId === 'placeholder') return
     sanityClient.fetch(MENU_PAGE_QUERY)
-      .then(result => setData(result?.items?.length ? result : { categories: STATIC_CATEGORIES, items: STATIC_ITEMS }))
-      .catch(() => setData({ categories: STATIC_CATEGORIES, items: STATIC_ITEMS }))
-      .finally(() => setLoading(false))
+      .then(result => { if (result?.items?.length) setData(result) })
+      .catch(() => {})
   }, [])
-
-  if (loading) return <div className="pt-16"><LoadingSpinner size={32} /></div>
 
   return (
     <main className="pb-20">

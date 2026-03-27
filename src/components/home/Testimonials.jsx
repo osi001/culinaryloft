@@ -50,19 +50,24 @@ const REVIEWS = [
   },
 ]
 
-export default function Testimonials() {
+export default function Testimonials({ reviews }) {
+  const list = (reviews && reviews.length > 0) ? reviews : REVIEWS
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState(1)
 
   useEffect(() => {
+    setIndex(0)
+  }, [list])
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setDirection(1)
-      setIndex(i => (i + 1) % REVIEWS.length)
+      setIndex(i => (i + 1) % list.length)
     }, 8000)
     return () => clearInterval(timer)
-  }, [])
+  }, [list])
 
-  const review = REVIEWS[index]
+  const review = list[index]
 
   return (
     <section className="bg-beige py-20 px-4 md:px-8">
@@ -74,7 +79,7 @@ export default function Testimonials() {
         <div className="relative min-h-[160px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
-              key={review.id}
+              key={review._id || review.id}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -18 }}
@@ -100,7 +105,7 @@ export default function Testimonials() {
 
         {/* Dot indicators */}
         <div className="flex items-center justify-center gap-2 mt-8">
-          {REVIEWS.map((_, i) => (
+          {list.map((_, i) => (
             <button
               key={i}
               onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i) }}

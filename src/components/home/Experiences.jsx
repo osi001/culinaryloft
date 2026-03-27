@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import photoSetting from '../../assets/photo-setting.jpeg'
 import photoStory from '../../assets/photo-story.jpeg'
 import photoSteam from '../../assets/photo-steam.jpeg'
+import { urlFor } from '../../lib/imageUrl'
 
 const SLIDES = [
   {
@@ -26,31 +27,47 @@ const SLIDES = [
   },
 ]
 
-export default function Experiences() {
+export default function Experiences({ slides: cmsSlides }) {
+  const slides = (cmsSlides && cmsSlides.length > 0)
+    ? cmsSlides.map(s => ({
+        id: s._id,
+        title: s.title,
+        body: s.body,
+        photo: s.photo ? s.photo : null,
+      }))
+    : SLIDES
+
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
+    setCurrent(0)
+  }, [slides.length])
+
+  useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent(i => (i + 1) % SLIDES.length)
+      setCurrent(i => (i + 1) % slides.length)
     }, 7000)
     return () => clearInterval(timer)
-  }, [])
+  }, [slides.length])
 
   return (
     <section className="relative overflow-hidden py-20 md:py-28">
 
       {/* Background photos */}
-      {SLIDES.map((s, i) => (
-        <motion.img
-          key={s.id}
-          src={s.photo}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          animate={{ opacity: i === current ? 1 : 0 }}
-          transition={{ duration: 1.4, ease: 'easeInOut' }}
-        />
-      ))}
+      {slides.map((s, i) => {
+        const src = s.photo?.asset ? urlFor(s.photo).width(1600).url() : s.photo
+        return src ? (
+          <motion.img
+            key={s.id}
+            src={src}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            animate={{ opacity: i === current ? 1 : 0 }}
+            transition={{ duration: 1.4, ease: 'easeInOut' }}
+          />
+        ) : null
+      })}
 
       {/* Diagonal gradient — same as other sections */}
       <div
@@ -80,7 +97,7 @@ export default function Experiences() {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={SLIDES[current].id}
+              key={slides[current].id}
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -14 }}
@@ -88,18 +105,18 @@ export default function Experiences() {
               className="flex flex-col gap-4"
             >
               <h2 className="font-display text-4xl md:text-5xl text-brown leading-tight">
-                {SLIDES[current].title}
+                {slides[current].title}
               </h2>
               <span className="block w-8 h-px bg-beige2" />
               <p className="font-body text-sm text-mid leading-loose whitespace-pre-line">
-                {SLIDES[current].body}
+                {slides[current].body}
               </p>
             </motion.div>
           </AnimatePresence>
 
           {/* Dots */}
           <div className="flex items-center gap-2 mt-8 mb-8">
-            {SLIDES.map((_, i) => (
+            {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}

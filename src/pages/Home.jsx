@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Hero from '../components/home/Hero'
@@ -8,6 +9,8 @@ import Testimonials from '../components/home/Testimonials'
 import ClientCam from '../components/home/ClientCam'
 import NewsletterSignup from '../components/home/NewsletterSignup'
 import steamPhoto from '../assets/photo-steam.jpeg'
+import { sanityClient } from '../lib/sanity'
+import { HOMEPAGE_QUERY } from '../lib/queries'
 
 const fadeIn = {
   hidden: { opacity: 0, y: 12 },
@@ -15,6 +18,16 @@ const fadeIn = {
 }
 
 export default function Home() {
+  const [cmsData, setCmsData] = useState(null)
+
+  useEffect(() => {
+    const projectId = import.meta.env.VITE_SANITY_PROJECT_ID
+    if (!projectId || projectId === 'placeholder') return
+    sanityClient.fetch(HOMEPAGE_QUERY)
+      .then(data => setCmsData(data))
+      .catch(() => {})
+  }, [])
+
   return (
     <main>
       <Hero />
@@ -97,9 +110,9 @@ export default function Home() {
       </section>
 
       <OurStory />
-      <Experiences />
+      <Experiences slides={cmsData?.experiences} />
       <Glimpses />
-      <Testimonials />
+      <Testimonials reviews={cmsData?.testimonials} />
       <ClientCam />
       <NewsletterSignup />
     </main>

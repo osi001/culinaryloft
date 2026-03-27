@@ -17,12 +17,10 @@ function buildCartMessage(items) {
   ].join('\n')
 }
 
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2349134661110'
-
-export default function CartDrawer() {
+export default function CartDrawer({ whatsappNumber }) {
   const { items, updateQty, removeItem, clearCart, total, drawerOpen, closeDrawer } = useCart()
   const count = items.reduce((sum, i) => sum + i.quantity, 0)
-  const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildCartMessage(items))}`
+  const waHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildCartMessage(items))}`
 
   return (
     <AnimatePresence>

@@ -2,14 +2,13 @@ import { Link } from 'react-router-dom'
 
 const PHONES = ['+2347025538333', '+2349134661110']
 const EMAILS = ['hello@theculinaryloft.com', 'orders@theculinaryloft.com']
-const WA_NUMBER = '2349134661110'
 const HOURS = [
   { days: 'Monday – Saturday', time: '8:00 AM – 9:00 PM' },
   { days: 'Sunday', time: 'Closed' },
 ]
 
-export default function Footer() {
-  const waHref = `https://wa.me/${WA_NUMBER}`
+export default function Footer({ whatsappNumber }) {
+  const waHref = `https://wa.me/${whatsappNumber}`
 
   return (
     <footer className="bg-beige border-t border-beige2 pt-14 pb-8 px-8 md:px-16">

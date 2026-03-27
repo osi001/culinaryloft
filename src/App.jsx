@@ -12,7 +12,7 @@ import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import './styles/globals.css'
 
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || '2349134661110'
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER
 
 export default function App() {
   return (
@@ -27,9 +27,9 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <Footer />
+        <Footer whatsappNumber={WHATSAPP_NUMBER} />
         <WhatsAppButton number={WHATSAPP_NUMBER} />
-        <CartDrawer />
+        <CartDrawer whatsappNumber={WHATSAPP_NUMBER} />
       </BrowserRouter>
     </CartProvider>
   )

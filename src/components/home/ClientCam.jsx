@@ -36,6 +36,7 @@ export default function ClientCam() {
   const [index, setIndex] = useState(CLONES)
   const [transitioning, setTransitioning] = useState(true)
   const timerRef = useRef(null)
+  const touchStartX = useRef(null)
 
   const advance = useCallback((dir) => {
     setTransitioning(true)
@@ -78,13 +79,19 @@ export default function ClientCam() {
     }
   }, [transitioning])
 
-  const handlePrev = () => {
-    advance(-1)
-    resetTimer()
+  const handlePrev = () => { advance(-1); resetTimer() }
+  const handleNext = () => { advance(1); resetTimer() }
+
+  const onTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
   }
-  const handleNext = () => {
-    advance(1)
-    resetTimer()
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return
+    const delta = touchStartX.current - e.changedTouches[0].clientX
+    if (Math.abs(delta) > 40) {
+      delta > 0 ? handleNext() : handlePrev()
+    }
+    touchStartX.current = null
   }
 
   return (
@@ -118,7 +125,11 @@ export default function ClientCam() {
         </div>
       </div>
 
-      <div className="overflow-hidden px-8 md:px-16">
+      <div
+        className="overflow-hidden px-8 md:px-16"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div
           className="flex gap-5 pb-6"
           style={{

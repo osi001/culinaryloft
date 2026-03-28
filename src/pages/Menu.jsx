@@ -15,8 +15,11 @@ export default function Menu() {
     const projectId = import.meta.env.VITE_SANITY_PROJECT_ID
     if (!projectId || projectId === 'placeholder') return
     sanityClient.fetch(MENU_PAGE_QUERY)
-      .then(result => { if (result?.items?.length) setData(result) })
-      .catch(() => {})
+      .then(result => {
+        console.log('[Sanity menu]', result)
+        if (result?.items?.length) setData(result)
+      })
+      .catch(err => console.error('[Sanity menu error]', err))
   }, [])
 
   return (

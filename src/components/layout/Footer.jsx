@@ -33,7 +33,7 @@ export default function Footer({ whatsappNumber }) {
               rel="noopener noreferrer"
               className="font-body text-xs text-mid hover:text-charcoal transition-colors tracking-wide"
             >
-              Order on Chowdeck ↗
+              Order on Chowdeck
             </a>
             <a
               href="https://glovo.go.link/open?link_type=store&store_id=516574&adjust_t=s321jkn"
@@ -41,7 +41,7 @@ export default function Footer({ whatsappNumber }) {
               rel="noopener noreferrer"
               className="font-body text-xs text-mid hover:text-charcoal transition-colors tracking-wide"
             >
-              Order on Glovo ↗
+              Order on Glovo
             </a>
           </div>
           <a

@@ -36,7 +36,7 @@ export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [] })
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  const addItem = (item) => { dispatch({ type: 'ADD_ITEM', item }); setDrawerOpen(true) }
+  const addItem = (item) => { dispatch({ type: 'ADD_ITEM', item }) }
   const removeItem = (id) => dispatch({ type: 'REMOVE_ITEM', id })
   const updateQty = (id, qty) => dispatch({ type: 'UPDATE_QTY', id, qty })
   const clearCart = () => dispatch({ type: 'CLEAR' })

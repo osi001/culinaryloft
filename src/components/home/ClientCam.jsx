@@ -1,42 +1,41 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { urlFor } from '../../lib/imageUrl'
 import cc1 from '../../assets/cc1.jpeg'
-import cc2 from '../../assets/cc2.jpeg'
-import cc3 from '../../assets/cc3.jpeg'
-import cc4 from '../../assets/cc4.jpeg'
 import cc5 from '../../assets/cc5.jpeg'
 import cc6 from '../../assets/cc6.jpeg'
 import cc7 from '../../assets/cc7.jpeg'
-import cc8 from '../../assets/cc8.jpeg'
-import cc9 from '../../assets/cc9.jpeg'
 import cc10 from '../../assets/cc10.jpeg'
-import cc11 from '../../assets/cc11.jpeg'
-import cc12 from '../../assets/cc12.jpeg'
-import cc13 from '../../assets/cc13.jpeg'
 import cc14 from '../../assets/cc14.jpeg'
 import cc15 from '../../assets/cc15.jpeg'
 import cc16 from '../../assets/cc16.jpeg'
 
-const PHOTOS = [cc10, cc5, cc1, cc7, cc6, cc14, cc15, cc16]
-const ROTATIONS = [1.5, -1, 2, 1, -1, 1, -1.5, 2]
-
-// Clone first/last few cards to enable seamless looping
-const CLONES = 4
-const TRACK = [
-  ...PHOTOS.slice(-CLONES),
-  ...PHOTOS,
-  ...PHOTOS.slice(0, CLONES),
-]
-const TRACK_ROTS = [
-  ...ROTATIONS.slice(-CLONES),
-  ...ROTATIONS,
-  ...ROTATIONS.slice(0, CLONES),
-]
+const STATIC_PHOTOS = [cc10, cc5, cc1, cc7, cc6, cc14, cc15, cc16]
+const BASE_ROTATIONS = [1.5, -1, 2, 1, -1, 1, -1.5, 2]
 
 const CARD_W = 276  // w-64 (256px) + gap-5 (20px)
 
-export default function ClientCam() {
+export default function ClientCam({ photos }) {
+  const photoList = (photos && photos.length > 0)
+    ? photos.map(p => urlFor(p.image).width(600).url())
+    : STATIC_PHOTOS
+
+  // Cycle BASE_ROTATIONS to match photoList length
+  const rotations = photoList.map((_, i) => BASE_ROTATIONS[i % BASE_ROTATIONS.length])
+
+  const CLONES = Math.min(4, photoList.length)
+  const TRACK = [
+    ...photoList.slice(-CLONES),
+    ...photoList,
+    ...photoList.slice(0, CLONES),
+  ]
+  const TRACK_ROTS = [
+    ...rotations.slice(-CLONES),
+    ...rotations,
+    ...rotations.slice(0, CLONES),
+  ]
   // Start at CLONES so the real first card is visible
   const [index, setIndex] = useState(CLONES)
+  const photoListLen = photoList.length
   const [transitioning, setTransitioning] = useState(true)
   const timerRef = useRef(null)
   const touchStartX = useRef(null)
@@ -58,7 +57,7 @@ export default function ClientCam() {
 
   // After sliding into a clone, instantly reposition to the real equivalent card
   useEffect(() => {
-    if (index >= PHOTOS.length + CLONES) {
+    if (index >= photoListLen + CLONES) {
       const id = setTimeout(() => {
         setTransitioning(false)
         setIndex(CLONES)
@@ -68,11 +67,11 @@ export default function ClientCam() {
     if (index < CLONES) {
       const id = setTimeout(() => {
         setTransitioning(false)
-        setIndex(PHOTOS.length + CLONES - 1)
+        setIndex(photoListLen + CLONES - 1)
       }, 750)
       return () => clearTimeout(id)
     }
-  }, [index])
+  }, [index, photoListLen, CLONES])
 
   // Re-enable transition only after the browser has painted the jumped position
   useEffect(() => {

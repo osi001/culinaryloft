@@ -114,7 +114,7 @@ export default function Home() {
       <Experiences slides={cmsData?.experiences} />
       <Glimpses />
       <Testimonials reviews={cmsData?.testimonials} />
-      <ClientCam />
+      <ClientCam photos={cmsData?.clientCamPhotos} />
       <OrderOnline />
       <NewsletterSignup />
     </main>

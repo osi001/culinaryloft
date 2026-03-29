@@ -2,6 +2,7 @@ import menuCategory from './menuCategory'
 import menuItem from './menuItem'
 import experience from './experience'
 import testimonial from './testimonial'
+import clientCamPhoto from './clientCamPhoto'
 import siteSettings from './siteSettings'
 import aboutPage from './aboutPage'
 import teamMember from './teamMember'
@@ -16,6 +17,7 @@ export const schemaTypes = [
   menuItem,
   experience,
   testimonial,
+  clientCamPhoto,
   siteSettings,
   // Page content
   aboutPage,

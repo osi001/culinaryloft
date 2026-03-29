@@ -1,4 +1,4 @@
-// Homepage data: featured items + testimonials + experiences + site settings
+// Homepage data: featured items + testimonials + experiences + site settings + client cam
 export const HOMEPAGE_QUERY = `{
   "featuredItems": *[_type == "menuItem" && featured == true && available == true] | order(_createdAt asc) [0..3] {
     _id, name, description, price, image, "categoryName": category->name,
@@ -8,6 +8,9 @@ export const HOMEPAGE_QUERY = `{
   },
   "experiences": *[_type == "experience"] | order(order asc) {
     _id, title, body, photo,
+  },
+  "clientCamPhotos": *[_type == "clientCamPhoto"] | order(order asc) {
+    _id, image, order,
   },
   "settings": *[_type == "siteSettings"][0] {
     businessName, tagline, whatsappNumber, phone, email, address, hours,

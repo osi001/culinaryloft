@@ -3,44 +3,22 @@ import { useState } from 'react'
 const INPUT_CLASSES = 'w-full bg-cream border border-beige2 text-charcoal font-body text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-tan'
 const LABEL_CLASSES = 'block font-body text-xs text-mid mb-1.5'
 
+const RECIPIENT = 'osidev001@gmail.com'
+
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
-  const [status, setStatus] = useState('idle')
-  const [errorMsg, setErrorMsg] = useState('')
 
   function handleChange(e) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
-    setStatus('loading')
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      const data = await res.json()
-      if (res.ok) {
-        setStatus('success')
-        setForm({ name: '', email: '', phone: '', message: '' })
-      } else {
-        setErrorMsg(data.error || 'Something went wrong. Please try again.')
-        setStatus('error')
-      }
-    } catch {
-      setErrorMsg('Connection error. Please try again.')
-      setStatus('error')
-    }
-  }
-
-  if (status === 'success') {
-    return (
-      <p className="font-body text-green text-base py-6">
-        Message sent! We'll be in touch shortly.
-      </p>
+    const subject = encodeURIComponent(`New enquiry from ${form.name.trim()}`)
+    const body = encodeURIComponent(
+      `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}${form.phone.trim() ? `\nPhone: ${form.phone.trim()}` : ''}\n\nMessage:\n${form.message.trim()}`
     )
+    window.location.href = `mailto:${RECIPIENT}?subject=${subject}&body=${body}`
   }
 
   return (
@@ -70,14 +48,10 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        disabled={status === 'loading'}
-        className="bg-charcoal text-white font-body font-medium text-sm py-3 px-7 rounded-sm hover:bg-mid transition-colors disabled:opacity-60 w-fit"
+        className="bg-charcoal text-white font-body font-medium text-sm py-3 px-7 rounded-sm hover:bg-mid transition-colors w-fit"
       >
-        {status === 'loading' ? 'Sending…' : 'Send Message'}
+        Send Message
       </button>
-      {status === 'error' && (
-        <p role="alert" className="text-sm font-body text-red-600">{errorMsg}</p>
-      )}
     </form>
   )
 }

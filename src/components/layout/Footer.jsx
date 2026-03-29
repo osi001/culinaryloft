@@ -26,6 +26,24 @@ export default function Footer({ whatsappNumber }) {
           >
             WhatsApp Us
           </a>
+          <div className="flex flex-col gap-2 mt-4">
+            <a
+              href="https://store.chowdeck.com/agungi/restaurants/culinary-loft-agungilrryea"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block font-body text-xs text-white bg-[#FF5722] px-5 py-2 rounded-sm hover:opacity-90 transition-opacity tracking-wide text-center"
+            >
+              Order on Chowdeck
+            </a>
+            <a
+              href="https://glovo.go.link/open?link_type=store&store_id=516574&adjust_t=s321jkn"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block font-body text-xs text-white bg-[#FFC244] px-5 py-2 rounded-sm hover:opacity-90 transition-opacity tracking-wide text-center"
+            >
+              Order on Glovo
+            </a>
+          </div>
           <a
             href="https://instagram.com/culinaryloft"
             target="_blank"

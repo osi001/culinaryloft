@@ -7,6 +7,7 @@ import Experiences from '../components/home/Experiences'
 import Glimpses from '../components/home/Glimpses'
 import Testimonials from '../components/home/Testimonials'
 import ClientCam from '../components/home/ClientCam'
+import OrderOnline from '../components/home/OrderOnline'
 import NewsletterSignup from '../components/home/NewsletterSignup'
 import steamPhoto from '../assets/photo-steam.jpeg'
 import { sanityClient } from '../lib/sanity'
@@ -114,6 +115,7 @@ export default function Home() {
       <Glimpses />
       <Testimonials reviews={cmsData?.testimonials} />
       <ClientCam />
+      <OrderOnline />
       <NewsletterSignup />
     </main>
   )

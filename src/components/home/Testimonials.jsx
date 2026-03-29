@@ -48,6 +48,11 @@ const REVIEWS = [
     handle: '@ladyzcch',
     quote: '@culinaryloft got all my money. Sure love my loft pasta.',
   },
+  {
+    id: 9,
+    handle: '@Halileads',
+    quote: 'Straight from the Airport to an amazing meal. The pasta was rich, flavorful, and perfectly cooked, and the sandwich was fresh, well-seasoned, and so satisfying. But let me talk about that iced coffee 😍 hands down the BEST I\'ve had in my life. So Smooth, refreshing, and just the right balance of flavor. Everything was 10/10. Great food, great taste, and definitely a spot I\'ll keep coming back to. Highly recommend 👌',
+  },
 ]
 
 export default function Testimonials({ reviews }) {

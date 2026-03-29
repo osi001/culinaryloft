@@ -15,8 +15,8 @@ import cc13 from '../../assets/cc13.jpeg'
 import cc14 from '../../assets/cc14.jpeg'
 import cc15 from '../../assets/cc15.jpeg'
 
-const PHOTOS = [cc8, cc10, cc5, cc1, cc9, cc7, cc6, cc11, cc13, cc14, cc15]
-const ROTATIONS = [-2, 1.5, -1, 2, -1.5, 1, -1, 2, -2, 1, -1.5]
+const PHOTOS = [cc10, cc5, cc1, cc7, cc6, cc14, cc15]
+const ROTATIONS = [1.5, -1, 2, 1, -1, 1, -1.5]
 
 // Clone first/last few cards to enable seamless looping
 const CLONES = 4

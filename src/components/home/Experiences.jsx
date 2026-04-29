@@ -55,7 +55,7 @@ export default function Experiences({ slides: cmsSlides }) {
 
       {/* Background photos */}
       {slides.map((s, i) => {
-        const src = s.photo?.asset ? urlFor(s.photo).width(1600).url() : s.photo
+        const src = s.photo?.asset ? urlFor(s.photo).width(1600).auto('format').url() : s.photo
         return src ? (
           <motion.img
             key={s.id}

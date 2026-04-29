@@ -7,7 +7,7 @@ import { STATIC_POSTS } from '../data/staticBlog'
 import LoadingSpinner from '../components/shared/LoadingSpinner'
 
 function PostCard({ post }) {
-  const imageUrl = post._featuredImageStatic || (post.featuredImage ? urlFor(post.featuredImage).width(600).height(450).url() : null)
+  const imageUrl = post._featuredImageStatic || (post.featuredImage ? urlFor(post.featuredImage).width(600).height(450).auto('format').url() : null)
   const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
@@ -21,6 +21,7 @@ function PostCard({ post }) {
           <img
             src={imageUrl}
             alt={post.title}
+            loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
         ) : (

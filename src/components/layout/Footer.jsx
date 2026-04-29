@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 const PHONES = ['+2347025538333', '+2349134661110']
-const EMAILS = ['hello@theculinaryloft.com', 'orders@theculinaryloft.com']
+const EMAILS = ['hello@theculinaryloft.com']
 const HOURS = [
   { days: 'Monday – Saturday', time: '8:00 AM – 9:00 PM' },
   { days: 'Sunday', time: 'Closed' },

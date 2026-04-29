@@ -14,7 +14,7 @@ function buildOrderMessage(item) {
 
 function MenuCard({ item, whatsappNumber, index }) {
   const waHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(buildOrderMessage(item))}`
-  const imageUrl = item.image ? urlFor(item.image).width(400).height(300).fit('crop').url() : null
+  const imageUrl = item.image ? urlFor(item.image).width(400).height(300).fit('crop').auto('format').url() : null
 
   return (
     <motion.article
@@ -26,7 +26,7 @@ function MenuCard({ item, whatsappNumber, index }) {
     >
       <div className="aspect-[4/3] bg-beige2 flex items-center justify-center overflow-hidden">
         {imageUrl ? (
-          <img src={imageUrl} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <img src={imageUrl} alt={item.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
         ) : (
           <UtensilsCrossed size={32} className="text-tan" aria-hidden="true" />
         )}

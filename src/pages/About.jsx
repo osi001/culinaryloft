@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import storyPhoto from '../assets/photo-story.jpeg'
 import emptyPhoto from '../assets/photo-empty.jpeg'
 import settingPhoto from '../assets/photo-setting.jpeg'
-import chefLogo from '../assets/logo-chef.png'
+import chefLogo from '../assets/logo-chef.webp'
 
 const fadeIn = {
   hidden: { opacity: 0, y: 12 },

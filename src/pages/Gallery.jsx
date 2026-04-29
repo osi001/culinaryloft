@@ -76,6 +76,7 @@ export default function Gallery() {
               <img
                 src={photo.src}
                 alt={photo.alt}
+                loading="lazy"
                 className="object-cover w-full h-full hover:scale-105 transition-transform duration-700"
               />
             </div>

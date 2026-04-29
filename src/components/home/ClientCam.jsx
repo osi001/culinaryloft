@@ -16,7 +16,7 @@ const CARD_W = 276  // w-64 (256px) + gap-5 (20px)
 
 export default function ClientCam({ photos }) {
   const photoList = (photos && photos.length > 0)
-    ? photos.map(p => urlFor(p.image).width(600).url())
+    ? photos.map(p => urlFor(p.image).width(600).auto('format').url())
     : STATIC_PHOTOS
 
   // Cycle BASE_ROTATIONS to match photoList length
@@ -152,6 +152,7 @@ export default function ClientCam({ photos }) {
                   src={src}
                   alt=""
                   aria-hidden="true"
+                  loading="lazy"
                   className="w-full h-64 object-cover"
                 />
               </div>

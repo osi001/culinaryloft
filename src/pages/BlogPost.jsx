@@ -60,7 +60,7 @@ export default function BlogPost() {
     )
   }
 
-  const imageUrl = post._featuredImageStatic || (post.featuredImage ? urlFor(post.featuredImage).width(1200).height(675).url() : null)
+  const imageUrl = post._featuredImageStatic || (post.featuredImage ? urlFor(post.featuredImage).width(1200).height(675).auto('format').url() : null)
 
   const formattedDate = new Date(post.publishedAt).toLocaleDateString('en-GB', {
     day: 'numeric',

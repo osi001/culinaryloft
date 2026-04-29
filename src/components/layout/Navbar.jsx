@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Menu, ShoppingBag } from 'lucide-react'
 import MobileMenu from './MobileMenu'
 import { useCart } from '../../context/CartContext'
-import logo from '../../assets/logo-chef.png'
+import logo from '../../assets/logo-chef.webp'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
